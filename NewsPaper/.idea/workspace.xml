@@ -35,6 +35,8 @@
 }</component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="$PROJECT_DIR$/NewsPaper/templates/sign" />
+      <recent name="$PROJECT_DIR$/NewsPaper/templates/protect" />
       <recent name="$PROJECT_DIR$/NewsPaper/templates/" />
       <recent name="$PROJECT_DIR$/NewsPaper/static" />
     </key>
@@ -57,6 +59,14 @@
           <url>file://$PROJECT_DIR$/NewsPaper/NewsPaper/urls.py</url>
           <line>16</line>
           <option name="timeStamp" value="1" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NewsPaper/news/views.py</url>
+          <option name="timeStamp" value="2" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/NewsPaper/news/urls.py</url>
+          <option name="timeStamp" value="3" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
