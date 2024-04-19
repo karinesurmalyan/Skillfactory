@@ -1,0 +1,38 @@
+from news.models import *
+c1 = Category.objects.create(name='Спорт')
+c2 = Category.objects.create(name='Наука')
+c3 = Category.objects.create(name='Образование')
+c4 = Category.objects.create(name='Культура')
+user1 = User.objects.create_user('user1')
+user2 = User.objects.create_user('user2')
+a1 = Author.objects.create(user=user1)
+a2 = Author.objects.create(user=user2)
+p1 = Post.objects.create(type='N', title='Figure Skating News', text='Yuzuru Hanyu is the best', author = a1)
+p2 = Post.objects.create(type='A', title='Music lessons in schools', text='Some text about music lessons', author = a1)
+p3 = Post.objects.create(type='A', title='New required equipments in schools', text='Schools will get new equipments for physics', author = a2)
+p1.category.add(c1)
+p2.category.add(c3)
+p2.category.add(c4)
+p3.category.add(c2)
+p3.category.add(c3)
+p1_com1 = Comment.objects.create(text='Facts', post=p1, user=a2.user)
+p1_com2 = Comment.objects.create(text='Seimei is the best program ever', post=p1, user=a2.user)
+p2_com = Comment.objects.create(text='Like it', post=p2, user=a2.user)
+p3_com = Comment.objects.create(text='Good news!', post=p3, user=a1.user)
+p1.like()
+p2.like()
+p1.like()
+p3.like()
+p3.like()
+p1_com2.like()
+p2_com.like()
+p3_com.like()
+p3_com.like()
+a1.update_rating()
+a2.update_rating()
+Author.objects.order_by("-rating").first().user
+Post.objects.order_by("-rating").first().date_in
+Post.objects.order_by("-rating").first().author
+Post.objects.order_by("-rating").first().rating
+Post.objects.order_by("-rating").first().title
+Comment.objects.filter(post=Post.objects.order_by("-rating").first()).values('date_in', 'user', 'text', 'rating')
