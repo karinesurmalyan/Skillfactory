@@ -1,7 +1,7 @@
 {% extends 'flatpages/default.html' %}
 
-{% load custom_filters %}
-{% load custom_tags %}
+{% load post_filters %}
+{% load post_tags %}
 
 {% block title %}
 <hr>
@@ -33,13 +33,13 @@
     {% for post in category_news_list %}
         <tr>
             <td>
-                <a href="{% url 'news_detail' post.id %}">{{ post.title|censor }}</a>
-                <a href="{% url 'news_edit' post.id %}"><u>Редактировать</u></a>
-                <a href="{% url 'news_delete' post.id %}"><u>Удалить</u></a>
+                <a href="{% url 'post_detail' post.id %}">{{ post.title|censor }}</a>
+                <a href="{% url 'post_edit' post.id %}"><u>Редактировать</u></a>
+                <a href="{% url 'post_delete' post.id %}"><u>Удалить</u></a>
             </td>
             <td>
                 {% for category in post.category.all %}
-                    <a href=" url 'category_list' category.id">{{ category }}</a>
+                    <a href="{% url 'category_list' category.id %}">{{ category }}</a>
                 {% endfor %}
             </td>
             <td>{{ post.date|date:'d M Y' }}</td>
@@ -48,7 +48,7 @@
     {% endfor %}
 </table>
 <hr>
-<a href="{% url 'news_add' %}"><h2>Добавить новость/статью</h2></a>
+<a href="{% url 'post_create' %}"><h2>Добавить новость/статью</h2></a>
 <hr>
 
 {% if is_paginated %}

@@ -16,7 +16,7 @@ class PostsList(ListView):
     model = Post
     ordering = '-date_in'
     template_name = 'posts.html'
-    context_object_name = 'post'
+    context_object_name = 'posts'
     paginate_by = 10
 
     def get_context_data(self, **kwargs):
@@ -34,7 +34,7 @@ class PostsList(ListView):
 class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
-    context_object_name = 'posts'
+    context_object_name = 'detail'
 
 
 class NewsSearch(ListView):
@@ -106,12 +106,13 @@ def upgrade_me(request):
 
 class CategoryListView(PostsList):
     model = Post
-    template = 'category_list.html'
+    template_name = 'category_list.html'
     context_object_name = 'category_news_list'
 
     def get_queryset(self, **kwargs):
+        queryset = super().get_queryset(**kwargs)
         self.category = get_object_or_404(Category, id=self.kwargs['pk'])
-        queryset = Post.objects.filter(category=self.category).order_by('-date_in')
+        queryset = queryset.filter(category=self.category).order_by('-date_in')
         return queryset
 
     def get_context_data(self, **kwargs):
