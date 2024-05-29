@@ -1,0 +1,60 @@
+29.05.2024 20-20-29 ERROR Internal Server Error: /posts/ /Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/utils/log.py (<class 'TypeError'>, TypeError("unsupported operand type(s) for -: 'str' and 'int'"), <traceback object at 0x7fa3d3479500>)
+Traceback (most recent call last):
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/core/handlers/exception.py", line 55, in inner
+    response = get_response(request)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/core/handlers/base.py", line 220, in _get_response
+    response = response.render()
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/response.py", line 114, in render
+    self.content = self.rendered_content
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/response.py", line 92, in rendered_content
+    return template.render(context, self._request)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/backends/django.py", line 61, in render
+    return self.template.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 175, in render
+    return self._render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 157, in render
+    return compiled_parent._render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 167, in _render
+    return self.nodelist.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/loader_tags.py", line 63, in render
+    result = block.nodelist.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 321, in render
+    return nodelist.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in render
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1005, in <listcomp>
+    return SafeString("".join([node.render_annotated(context) for node in self]))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/defaulttags.py", line 238, in render
+    nodelist.append(node.render_annotated(context))
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 966, in render_annotated
+    return self.render(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 1064, in render
+    output = self.filter_expression.resolve(context)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/template/base.py", line 742, in resolve
+    new_obj = func(obj, *arg_vals)
+  File "/Users/karinesurmalyan/PycharmProjects/NewsPaper/NewsPaper/news/templatetags/post_filters.py", line 13, in censor
+    word = word.replace(i[1:], '*' * len(i[1:]-1) + i[-1])
+TypeError: unsupported operand type(s) for -: 'str' and 'int'
+29.05.2024 20-20-29 ERROR "GET /posts/?page=2 HTTP/1.1" 500 199628 /Users/karinesurmalyan/PycharmProjects/NewsPaper/venv/lib/python3.8/site-packages/django/core/servers/basehttp.py None

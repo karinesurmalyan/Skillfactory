@@ -10,6 +10,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMix
 from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
+from django.core.cache import cache
 
 
 class PostsList(ListView):
@@ -35,6 +36,14 @@ class PostDetail(DetailView):
     model = Post
     template_name = 'post.html'
     context_object_name = 'detail'
+    queryset = Post.objects.all()
+
+    def get_object(self, *args, **kwargs):
+        obj = cache.get(f'product-{self.kwargs["pk"]}', None)
+        if not obj:
+            obj = super().get_object(queryset=self.queryset)
+            cache.set(f'product-{self.kwargs["pk"]}', obj)
+        return obj
 
 
 class NewsSearch(ListView):

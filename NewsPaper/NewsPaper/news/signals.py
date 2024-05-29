@@ -3,6 +3,7 @@ from django.dispatch import receiver
 from django.core.mail import mail_managers, EmailMultiAlternatives
 from .models import PostCategory
 from django.template.loader import render_to_string
+from .tasks import notification_of_new_post
 
 from django.conf import settings
 
@@ -34,9 +35,10 @@ from django.conf import settings
 @receiver(m2m_changed, sender=PostCategory)
 def new_post_notification(sender, instance, **kwargs):
     if kwargs['action'] == 'post__add':
-        categories = instance.category.all()
-        subscribers_emails = []
-
-        for cat in categories:
-            subscribers = cat.subscribers.all()
-            subscribers_emails += [s.email for s in subscribers]
+        notification_of_new_post.delay(instance.pk)
+        # categories = instance.category.all()
+        # subscribers_emails = []
+        #
+        # for cat in categories:
+        #     subscribers = cat.subscribers.all()
+        #     subscribers_emails += [s.email for s in subscribers]

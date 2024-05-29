@@ -4,6 +4,7 @@ from .views import (
 )
 from allauth.account.views import LogoutView, LoginView
 from .views import upgrade_me
+from django.views.decorators.cache import cache_page
 
 
 urlpatterns = [

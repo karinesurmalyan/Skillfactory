@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
+from django.core.cache import cache
 
 
 class Author(models.Model):
@@ -22,7 +23,7 @@ class Author(models.Model):
 
 class Category(models.Model):
     name = models.CharField(max_length=50, unique=True)
-    subscribers = models.ManyToManyField(User, blank=True, null=True, related_name='categories')
+    subscribers = models.ManyToManyField(User, blank=True, related_name='categories')
 
     def __str__(self):
         return self.name
@@ -39,7 +40,7 @@ class Post(models.Model):
     ]
 
     author = models.ForeignKey(Author, on_delete = models.CASCADE)
-    type = models.CharField(max_length=1, choices=POSITIONS, default = news)
+    type = models.CharField(max_length=1, choices=POSITIONS, default=news)
     date_in = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category, through='PostCategory')
     title = models.CharField(max_length=255)
@@ -59,6 +60,13 @@ class Post(models.Model):
 
     def get_absolute_url(self):
         return reverse('post_detail', args=[str(self.id)])
+
+    def __str__(self):
+        return f'{self.title} {self.text}'
+
+    def save(self, *args, **kwargs):
+        super().save(*args, **kwargs)
+        cache.delete(f'post-{self.pk}')
 
 
 class PostCategory(models.Model):
