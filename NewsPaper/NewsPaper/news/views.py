@@ -11,6 +11,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import Group, User
 from django.contrib.auth.decorators import login_required
 from django.core.cache import cache
+from django.utils.translation import gettext as _  # импортируем функцию для перевода
 
 
 class PostsList(ListView):
@@ -136,5 +137,5 @@ def subscribe(request, pk):
     user = request.user
     category = Category.objects.get(id=pk)
     category.subscribers.add(user)
-    message = 'Вы подписались на рассылку новостей категории'
+    message = _('Вы подписались на рассылку новостей категории')
     return render(request, 'subscribe.html', {'category': category, 'message': message})

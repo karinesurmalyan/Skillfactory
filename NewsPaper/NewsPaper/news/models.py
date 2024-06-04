@@ -3,11 +3,12 @@ from django.contrib.auth.models import User
 from django.db.models import Sum
 from django.db.models.functions import Coalesce
 from django.urls import reverse
-from django.core.cache import cache
+from linecache import cache
+from django.utils.translation import gettext as _
 
 
 class Author(models.Model):
-    user = models.OneToOneField(User, on_delete = models.CASCADE)
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
     rating = models.IntegerField(default=0)
 
     def __str__(self):
@@ -22,7 +23,7 @@ class Author(models.Model):
 
 
 class Category(models.Model):
-    name = models.CharField(max_length=50, unique=True)
+    name = models.CharField(max_length=50, help_text=_('category name'),unique=True)
     subscribers = models.ManyToManyField(User, blank=True, related_name='categories')
 
     def __str__(self):
@@ -35,8 +36,8 @@ class Post(models.Model):
     news = 'N'
 
     POSITIONS = [
-        (article, 'Статья'),
-        (news, 'Новость')
+        (article, _('Articles')),
+        (news, _('News'))
     ]
 
     author = models.ForeignKey(Author, on_delete = models.CASCADE)

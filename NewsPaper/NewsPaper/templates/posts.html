@@ -1,32 +1,48 @@
 {% extends 'flatpages/default.html' %}
+{% load i18n %}
 {% load post_filters %}
 
 {% block title %}
-Posts
+<hr>
+    <h1>{% trans "All posts" %} ({{ posts|length }})</h1>
+    <a href="{% url 'post_search' %}"><h2>{% trans "News search" %}</h2></a>
+<hr>
 {% endblock title %}
 
 {% block content %}
-   <h1>Все посты ({{ posts|length }})</h1>
+   <h2>{% trans "Posts quantity:" %} {{ posts|length }}</h2>
     <h3>{{ time_now|date:'d M Y' }}</h3>
     <hr>
     {% if posts %}
         <table>
             <tr>
-                <td>Заголовок</td>
-                <td>Дата публикации</td>
-                <td>Текст</td>
+                <td>{% trans "Title" %}</td>
+                <td>{% trans "Date of publication" %}</td>
+                <td>{% trans "Text" %}</td>
             </tr>
             {% for post in posts %}
             <tr>
-               <td>{{ post.title|censor }}</td>
-               <td>{{ post.date_in }}</td>
-               <td>{{ post.text|truncatewords:20|censor }}</td>
+            <td>
+                <a href="{% url 'post_detail' post.id %}">{{ post.title|censor }}</a>
+                <a href="{% url 'post_edit' post.id %}"><u>{% trans "Edit" %}</u></a>
+                <a href="{% url 'post_delete' post.id %}"><u>{% trans "Delete" %}</u></a>
+            </td>
+             <td>
+                {% for category in post.category.all %}
+                    <a href="{% url 'category_list' category.id %}">{{ category }}</a>
+                {% endfor %}
+            </td>
+            <td>{{ post.date|date:'d M Y' }}</td>
+            <td>{{ post.text|truncatewords:20|censor }}</td>
             </tr>
             {% endfor %}
         </table>
     {% else %}
-        <h2>Постов нет!</h2>
+        <h2>{% trans "There are no posts!" %}</h2>
     {% endif %}
+    <hr>
+    <a href="{% url 'post_create' %}"><h6>{% trans "Create post" %}</h6></a>
+    <hr>
     {% if page_obj.has_previous %}
        <a href="?page=1">1</a>
        {% if page_obj.previous_page_number != 1 %}
