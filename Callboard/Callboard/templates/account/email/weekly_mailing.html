@@ -1,0 +1,14 @@
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+</head>
+<body>
+<b>Новые объявления</b>
+<br>
+<ul>
+    {% for post in posts %}
+        <li><a href="{{ link }}{{ post.get_absolute_url }}" style="color: #4682B4">{{ ad.title }}</a></li>
+    {% endfor %}
+</ul>
+</body>
+</html>
