@@ -35,6 +35,8 @@ SITE_ID = 1
 CKEDITOR_UPLOAD_PATH = 'uploads/'
 # Application definition
 
+CSRF_TRUSTED_ORIGINS = ['https://*.example.com']
+
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -164,7 +166,7 @@ ACCOUNT_USERNAME_REQUIRED = True
 ACCOUNT_AUTHENTICATION_METHOD = 'email'
 ACCOUNT_EMAIL_VERIFICATION = 'none'
 ACCOUNT_FORMS = {'signup': 'board.forms.BasicSignupForm'}
-EMAIL_HOST = 'smtp'
+EMAIL_HOST = 'smtp.yandex.ru'
 EMAIL_PORT = 465
 EMAIL_HOST_USER = os.getenv('EMAIL_HOST_USER')
 EMAIL_HOST_PASSWORD = os.getenv('EMAIL_HOST_PASSWORD')

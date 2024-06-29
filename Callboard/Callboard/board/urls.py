@@ -3,7 +3,7 @@ from .views import *
 from django.shortcuts import redirect
 from allauth.account.views import LogoutView, LoginView
 
-urlpatterns =[
+urlpatterns = [
     path('', AnnouncementsList.as_view(), name='posts'),
     path('confirm/', ConfirmUser.as_view(), name='confirm_user'),
     path('<int:pk>', AnnouncementDetail.as_view(), name='post_detail'),
@@ -16,7 +16,7 @@ urlpatterns =[
     path('comments/<int:pk>/accept/', comment_accept, name='comment_accept'),
     path('comments/<int:pk>/delete/', comment_decline, name='comment_decline'),
     path('profile/', IndexView.as_view(), name='profile'),
-    # path('login/', LoginView.as_view(template_name='login.html'), name='login'),
-    # path('signup/', SignupView.as_view(template_name='signup.html'), name='signup'),
-    # path('logout/', LogoutView.as_view(), name='logout'),
+    path('login/', LoginView.as_view(template_name='login.html'), name='login'),
+    path('signup/', IndexView.as_view(template_name='signup.html'), name='signup'),
+    path('logout/', LogoutView.as_view(), name='logout'),
 ]

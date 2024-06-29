@@ -1,7 +1,5 @@
-from django import forms
 from allauth.account.forms import SignupForm
-from django.contrib.auth.models import Group
-from .models import Announcement, Comment
+from .models import Announcement, Comment, User
 from django import forms
 from django.core.exceptions import ValidationError
 from .extensions import *
@@ -10,6 +8,7 @@ from string import hexdigits
 import random
 from django.conf import settings
 from django.core.mail import send_mail
+from django.db.models import TextField
 
 
 class PostForm(forms.ModelForm):
@@ -38,6 +37,7 @@ class PostForm(forms.ModelForm):
         label='Содержание объявления',
         required=True,
     )
+
     class Meta:
         model = Announcement
         fields = ['category', 'title', 'text']
@@ -55,6 +55,8 @@ class PostForm(forms.ModelForm):
 
 
 class CommentForm(forms.ModelForm):
+    text = TextField()
+
     class Meta:
         model = Comment
         fields = ['text']
@@ -65,6 +67,8 @@ class CommentForm(forms.ModelForm):
 
 
 class BasicSignupForm(SignupForm):
+    model = User
+
     def save(self, request):
         user = super(BasicSignupForm, self).save(request)
         user.is_active = False
