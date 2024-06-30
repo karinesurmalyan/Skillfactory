@@ -13,7 +13,7 @@
 <h4>Дата: {{ comment.date|date:'d M Y' }}</h4>
     <hr>
     <h3>Текст: {{ comment.text }}</h3>
-{% if comment.active == False %}
+{% if comment.ia_accepted == False %}
     <a href="/posts/comments/{{ comment.id }}/accept/"><b>Принять</b></a>
     <a>&nbsp;&nbsp;&nbsp;</a>
     <a href="/posts/comments/{{ comment.id }}/delete/" ><b>Удалить</b></a>
