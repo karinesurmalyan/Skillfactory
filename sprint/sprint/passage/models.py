@@ -31,9 +31,9 @@ class Coordinates(models.Model):
 
 class Levels(models.Model):
     winter = models.CharField(max_length=3, choices=LEVEL, verbose_name='Зима', null=True, blank=True)
-    spring = models.CharField(max_length=3, choices=LEVEL, verbose_name='Зима', null=True, blank=True)
-    summer = models.CharField(max_length=3, choices=LEVEL, verbose_name='Зима', null=True, blank=True)
-    autumn = models.CharField(max_length=3, choices=LEVEL, verbose_name='Зима', null=True, blank=True)
+    spring = models.CharField(max_length=3, choices=LEVEL, verbose_name='Весна', null=True, blank=True)
+    summer = models.CharField(max_length=3, choices=LEVEL, verbose_name='Лето', null=True, blank=True)
+    autumn = models.CharField(max_length=3, choices=LEVEL, verbose_name='Осень', null=True, blank=True)
 
     class Meta:
         verbose_name = 'Уровень сложности'
@@ -57,7 +57,7 @@ class Passage(models.Model):
         return f'{self.pk} {self.add_time} {self.beauty_title}'
 
 
-class Images:
+class Images(models.Model):
     passage = models.ForeignKey(Passage, on_delete=models.CASCADE, related_name='images', blank=True, null=True)
     data = models.URLField(blank=True)
     title = models.TextField(max_length=255, null=True, blank=True)
