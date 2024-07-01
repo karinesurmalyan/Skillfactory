@@ -17,7 +17,7 @@ class Users(models.Model):
         verbose_name = "Турист"
 
 
-class Coordinates:
+class Coordinates(models.Model):
     latitude = models.FloatField(verbose_name='Широта')
     longitude = models.FloatField(verbose_name='Долгота')
     height = models.IntegerField(verbose_name='Высота')
@@ -48,16 +48,17 @@ class Passage(models.Model):
     other_titles = models.CharField(max_length=100, blank=True, null=True, verbose_name='Другие названия')
     connect = models.TextField(blank=True, null=True, verbose_name='Что соединяет')
     add_time = models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    user = models.ForeignKey(Users, on_delete=models.CASCADE)
+    user = models.ForeignKey(Users, on_delete=models.CASCADE, related_name='user')
     coordinates = models.ForeignKey(Coordinates, on_delete=models.CASCADE)
     level = models.ForeignKey(Levels, on_delete=models.CASCADE)
+    status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='new')
 
     def __str__(self):
         return f'{self.pk} {self.add_time} {self.beauty_title}'
 
 
 class Images:
-    passage = models.ForeignKey(Passage, on_delete=models.CASCADE)
+    passage = models.ForeignKey(Passage, on_delete=models.CASCADE, related_name='images', blank=True, null=True)
     data = models.URLField(blank=True)
     title = models.TextField(max_length=255, null=True, blank=True)
 
