@@ -56,11 +56,18 @@ class Passage(models.Model):
     def __str__(self):
         return f'{self.pk} {self.add_time} {self.beauty_title}'
 
+    class Meta:
+        verbose_name = 'Перевал'
+
 
 class Images(models.Model):
     passage = models.ForeignKey(Passage, on_delete=models.CASCADE, related_name='images', blank=True, null=True)
-    data = models.URLField(blank=True)
+    data = models.URLField(blank=True, null=True)
     title = models.TextField(max_length=255, null=True, blank=True)
 
     def __str__(self):
-        return f'{self.pk} {self.data}'
+        return f'{self.pk} {self.title}'
+
+    class Meta:
+        verbose_name = 'Изображение'
+        verbose_name_plural = 'Изображения'

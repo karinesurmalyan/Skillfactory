@@ -35,4 +35,4 @@ class PassageSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Passage
-        exclude = ['add_time', 'status']
+        exclude = ['status']
