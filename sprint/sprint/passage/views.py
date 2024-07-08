@@ -41,3 +41,6 @@ class PassageViewset(viewsets.ModelViewSet):
                 "message": "Ошибка подключения к базе данных",
                 "id": None
             })
+
+    def update(self, request, *args, **kwargs):
+        pass

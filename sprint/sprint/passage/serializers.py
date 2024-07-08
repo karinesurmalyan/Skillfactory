@@ -1,6 +1,7 @@
 from .models import *
 from rest_framework import serializers
 from drf_writable_nested import WritableNestedModelSerializer
+from rest_framework.exceptions import ValidationError
 
 
 class UsersSerializer(serializers.HyperlinkedModelSerializer):
@@ -36,3 +37,15 @@ class PassageSerializer(WritableNestedModelSerializer):
     class Meta:
         model = Passage
         exclude = ['status']
+
+    def validate(self, data):
+        user_data = data.get('user')
+        user = self.instance.user
+        if user_data is not None:
+            if user.name != user_data.get('name') \
+                    or user.fam != user_data.get('fam') \
+                    or user.otc != user_data.get('otc') \
+                    or user.email != user_data.get('email') \
+                    or user.phone != user_data.get('phone'):
+                raise ValidationError({'maessage': 'Вы не можете редактировать данные'})
+            return data
