@@ -127,7 +127,3 @@
 
 <p>Документация swagger: http://127.0.0.1:8000/swagger/</p>
 Документация redoc: http://127.0.0.1:8000/redoc/
-
-<strong>Отчет о покрытии тестами</strong>
-
-<img src='[/Users/karinesurmalyan/PycharmProjects/sprint/sprint/tests_coverage.png](https://github.com/karinesurmalyan/Skillfactory/blob/sprint3/sprint/sprint/img.png)' />
