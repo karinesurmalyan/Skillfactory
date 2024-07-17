@@ -36,7 +36,7 @@ class PassageSerializer(WritableNestedModelSerializer):
 
     class Meta:
         model = Passage
-        fields = '__all__'
+        exclude = ['status', 'add_time']
 
     def validate(self, data):
         if self.instance is not None:

@@ -22,8 +22,6 @@ from passage.views import *
 
 
 router = routers.DefaultRouter()
-router.register(r'users', UsersViewset)
-router.register(r'images', ImagesViewset)
 router.register(r'passages', PassageViewset)
 
 

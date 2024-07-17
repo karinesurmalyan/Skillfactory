@@ -4,6 +4,7 @@ from rest_framework import status
 from .models import *
 from django.urls import reverse
 from .serializers import PassageSerializer
+import json
 
 
 class PassageApiTestCase(APITestCase):
@@ -34,7 +35,7 @@ class PassageApiTestCase(APITestCase):
         )
         self.image_1 = Images.objects.create(
                 passage=self.passage_1,
-                title='some titile',
+                title='some title',
                 data='http://lagonaki-otdyh.ru/sites/default/files/styles/860x465/public/field/image/azishkij-pereval-03.jpg?itok=HFn4Kapl'
             )
 
@@ -83,6 +84,44 @@ class PassageApiTestCase(APITestCase):
         self.assertEqual(serializer_data, response.data)
         self.assertEqual(status.HTTP_200_OK, response.status_code)
 
+    def test_passage_update(self):
+        url = reverse('passage-detail', args=(self.passage_1.id,))
+        data = {
+            'user': {
+                'fam': 'Петров',
+                'name': 'Петр',
+                'otc': 'Петрович',
+                'email': 'test@example.com',
+                'phone': '89997776655'
+            },
+            "coordinates": {
+                'latitude': 55.4,
+                'longitude': 77.6,
+                'height': 888
+            },
+            "level": {
+                "winter": "1a",
+                "spring": "2a",
+                "summer": "2a",
+                "autumn": "2a"
+            },
+            "images": [
+                {
+                    "data": 'http://lagonaki-otdyh.ru/sites/default/files/styles/860x465/public/field/image/azishkij-pereval-03.jpg?itok=HFn4Kapl',
+                    "title": "some title"
+                }
+            ],
+            'beauty_title': 'Перевал изменен',
+            'title': 'Азишский',
+            'other_titles': 'Лагонаки',
+            'connect': 'хребет'
+        }
+        json_data = json.dumps(data)
+        response = self.client.patch(path=url, data=json_data, content_type='application/json')
+        self.assertEqual(status.HTTP_200_OK, response.status_code)
+        self.passage_1.refresh_from_db()
+        self.assertEqual('Перевал изменен', self.passage_1.beauty_title)
+
 
 class PassageSerializerTestCase(TestCase):
     def setUp(self):
@@ -112,7 +151,7 @@ class PassageSerializerTestCase(TestCase):
         )
         self.image_1 = Images.objects.create(
                 passage=self.passage_1,
-                title='some titile',
+                title='some title',
                 data='http://lagonaki-otdyh.ru/sites/default/files/styles/860x465/public/field/image/azishkij-pereval-03.jpg?itok=HFn4Kapl'
             )
 
@@ -150,7 +189,7 @@ class PassageSerializerTestCase(TestCase):
         serializer_data = PassageSerializer([self.passage_1, self.passage_2], many=True).data
         expected_data = [
             {
-                'id': 1,
+                'id': 7,
                 'user': {
                     'fam': 'Петров',
                     'name': 'Петр',
@@ -181,7 +220,7 @@ class PassageSerializerTestCase(TestCase):
                 'connect': 'хребет'
             },
             {
-                'id': 2,
+                'id': 8,
                 'user': {
                     'fam': 'Александров',
                     'name': 'Александр',

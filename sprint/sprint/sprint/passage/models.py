@@ -10,9 +10,6 @@ class Users(models.Model):
     otc = models.TextField(max_length=30, verbose_name="Отчество")
     phone = models.CharField(max_length=30, verbose_name="Номер телефона")
 
-    def __str__(self):
-        return f'{self.fam} {self.name} {self.otc}'
-
     class Meta:
         verbose_name = "Турист"
 
@@ -25,9 +22,6 @@ class Coordinates(models.Model):
     class Meta:
         verbose_name = 'Координаты'
 
-    def __str__(self):
-        return f'Широта: {self.latitude}, долгота: {self.longitude}, высота: {self.height}'
-
 
 class Levels(models.Model):
     winter = models.CharField(max_length=3, choices=LEVEL, verbose_name='Зима', null=True, blank=True)
@@ -37,9 +31,6 @@ class Levels(models.Model):
 
     class Meta:
         verbose_name = 'Уровень сложности'
-
-    def __str__(self):
-        return f' Зима {self.winter}, весна {self.spring}, лето {self.summer}, осень {self.autumn}'
 
 
 class Passage(models.Model):
@@ -53,9 +44,6 @@ class Passage(models.Model):
     level = models.ForeignKey(Levels, on_delete=models.CASCADE)
     status = models.CharField(max_length=8, choices=STATUS_CHOICES, default='new')
 
-    def __str__(self):
-        return f'{self.pk} {self.add_time} {self.beauty_title}'
-
     class Meta:
         verbose_name = 'Перевал'
 
@@ -64,9 +52,6 @@ class Images(models.Model):
     passage = models.ForeignKey(Passage, on_delete=models.CASCADE, related_name='images', blank=True, null=True)
     data = models.URLField(blank=True, null=True)
     title = models.TextField(max_length=255, null=True, blank=True)
-
-    def __str__(self):
-        return f'{self.pk} {self.title}'
 
     class Meta:
         verbose_name = 'Изображение'

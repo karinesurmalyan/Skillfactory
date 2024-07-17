@@ -6,16 +6,6 @@ from rest_framework.response import Response
 from rest_framework.exceptions import ValidationError
 
 
-class UsersViewset(viewsets.ModelViewSet):
-    queryset = Users.objects.all()
-    serializer_class = UsersSerializer
-
-
-class ImagesViewset(viewsets.ModelViewSet):
-    queryset = Images.objects.all()
-    serializer_class = ImagesSerializer
-
-
 class PassageViewset(viewsets.ModelViewSet):
     queryset = Passage.objects.all()
     serializer_class = PassageSerializer
