@@ -97,7 +97,7 @@ class PassageApiTestCase(APITestCase):
             "coordinates": {
                 'latitude': 55.4,
                 'longitude': 77.6,
-                'height': 888
+                'height': 1000
             },
             "level": {
                 "winter": "1a",
@@ -121,6 +121,50 @@ class PassageApiTestCase(APITestCase):
         self.assertEqual(status.HTTP_200_OK, response.status_code)
         self.passage_1.refresh_from_db()
         self.assertEqual('Перевал изменен', self.passage_1.beauty_title)
+        self.assertEqual('1a', self.passage_1.level.winter)
+        self.assertEqual(1000, self.passage_1.coordinates.height)
+
+    def test_user_email(self):
+        email = self.passage_1.user.email
+        url = f'/passages/?user__email=<{email}>'
+        response = self.client.get(url)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
+
+    def test_create(self):
+        url = reverse('passage-list')
+        data = {
+            'user': {
+                'fam': 'hhhh',
+                'name': 'hhhh',
+                'otc': 'sdfgh',
+                'email': 'tqw@example.com',
+                'phone': '88888888888'
+            },
+            "coordinates": {
+                'latitude': 77,
+                'longitude': 567,
+                'height': 5879
+            },
+            "level": {
+                "winter": "1a",
+                "spring": "1a",
+                "summer": "1a",
+                "autumn": "1a"
+            },
+            "images": [
+                {
+                    "data": 'http://lagonaki-otdyh.ru/sites/default/files/styles/860x465/public/field/image/azishkij-pereval-03.jpg?itok=HFn4Kapl',
+                    "title": "dfgh"
+                }
+            ],
+            'beauty_title': 'dfgh',
+            'title': 'fghm',
+            'other_titles': 'ghjи',
+            'connect': 'cvbn'
+        }
+        json_data = json.dumps(data)
+        response = self.client.post(path=url, content_type='application/json', data=json_data)
+        self.assertEqual(response.status_code, status.HTTP_200_OK)
 
 
 class PassageSerializerTestCase(TestCase):
@@ -189,7 +233,7 @@ class PassageSerializerTestCase(TestCase):
         serializer_data = PassageSerializer([self.passage_1, self.passage_2], many=True).data
         expected_data = [
             {
-                'id': 7,
+                'id': self.passage_1.id,
                 'user': {
                     'fam': 'Петров',
                     'name': 'Петр',
@@ -220,7 +264,7 @@ class PassageSerializerTestCase(TestCase):
                 'connect': 'хребет'
             },
             {
-                'id': 8,
+                'id': self.passage_2.id,
                 'user': {
                     'fam': 'Александров',
                     'name': 'Александр',

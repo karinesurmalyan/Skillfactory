@@ -38,6 +38,7 @@ class PassageViewset(viewsets.ModelViewSet):
         if passage.status == 'new':
             serializer = PassageSerializer(passage, data=request.data, partial=True)
             if serializer.is_valid():
+                serializer.save()
                 return Response({
                     "status": "1",
                     "message": "Запись успешно изменена"
