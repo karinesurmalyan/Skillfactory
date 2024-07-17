@@ -123,6 +123,11 @@
     <li>Для создания и изменения объектов моделей со связанными данными вложенных сериализаторов использован пакет drf-writable-nested</li>
 </ol>
 
+<strong>Документация сгенерирована с помощью пакета drf-yasg</strong>
+
+<p>Документация swagger: http://127.0.0.1:8000/swagger/</p>
+Документация redoc: http://127.0.0.1:8000/redoc/
+
 <strong>Отчет о покрытии тестами</strong>
 
-<img src='file:///Users/karinesurmalyan/Desktop/Снимок%20экрана%202024-07-18%20в%2000.20.39.png' />
+<img src='/Users/karinesurmalyan/PycharmProjects/sprint/sprint/tests_coverage.png' />
